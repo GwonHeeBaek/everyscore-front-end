@@ -71,40 +71,40 @@
   <body>
     <header>
         <p class="Login_Total_Info">
-         <a href="http://everyScore.co.kr"><img src="img/outline_done_outline_black_24dp.png"  title="Logo" height="50" width="55"></a>
-          <strong><a href="Login_Page.html">Every Score</a></strong>
+         <a href="loginform.jsp"><img src="img/outline_done_outline_black_24dp.png"  title="Logo" height="50" width="55"></a>
+          <strong><a href="loginform.jsp">Every Score</a></strong>
         </p>
     </header>
     <div id="container">
       <div id="join">
-       <form name="Join_Total_Information" action="http://ManagePage.co.kr" method="post">
+       <form id="join_form" name="Join_Total_Information" action="/api/v1/join" method="post">
         <table border="0">
           <tr>
             <td>
-              <input class="gender" type="radio" name="gender" required value="male">남자
-              <input class="gender" type="radio" name="gender" required value="female">여자
+              <input class="gender" type="radio" name="gender" value="male" checked="checked">남자
+              <input class="gender" type="radio" name="gender" value="female">여자
             </td>
           </tr>
           <tr>
-            <td><input class="box" type="text" name="major" required placeholder="  학번"></td>
+            <td><input required class="box" type="text" name="classnumber" id="classnumber" placeholder="  학번"></td>
           </tr>
           <tr>
-             <td><input class="box" type="text" name="classnumber" required placeholder="  학과"></td>
+             <td><input required class="box" type="text" id="major" name="major" placeholder="  학과"></td>
           </tr>
           <tr>
-             <td><input class="box" type="text" name="name" required  placeholder="  이름"></td>
+             <td><input required class="box" type="text" id="name" name="name" placeholder="  이름"></td>
           </tr>
           <tr>
-              <td><input class="box" type="date" name="date" required ></td>
+              <td><input required class="box" type="date" name="date"></td>
           </tr>
           <tr>
-             <td><input class="box" type="text" name="id" required placeholder="  ID"></td>
+             <td><input required class="box" type="text" name="id" id="id" placeholder="  ID"></td>
           </tr>
           <tr>
-             <td><input class="box" type="password" name="pw" required placeholder="  PW"></td>
+             <td><input required class="box" type="password" name="pw" placeholder="  PW"></td>
           </tr>
           <tr>
-             <td><input class="box" type="text" name="email" required placeholder="  Email"></td>
+             <td><input required class="box" type="text" name="email" id="email" placeholder="  Email"></td>
           </tr>
         </table>
         <br>
@@ -117,3 +117,38 @@
     <br>
   </body>
 </html>
+<script>
+const joinform = document.querySelector("#join_form");
+const joininputclassnumber = document.querySelector("#join_form input[id=classnumber]");
+const joininputmajor = document.querySelector("#join_form input[id=major]");
+const joininputname = document.querySelector("#join_form input[id=name]");
+const joininputid = document.querySelector("#join_form input[id=id]");
+const joininputemail = document.querySelector("#join_form input[id=email]");
+const joininputPw = document.querySelector("#join_form input[type=password]");
+const joininputdate = document.querySelector("#join_form input[type=date]");
+const joininputgender = document.querySelector("#join_form input[type=radio]");
+
+function onjoinsubmit(event){
+	
+	const id = joininputid.value;
+    const pw = joininputPw.value;
+    const cn = joininputclassnumber.value;
+    const mj = joininputmajor.value;
+    const nm = joininputname.value;
+    const em = joininputemail.value;
+    const dt = joininputdate.value;
+    const gd = joininputgender.value;
+  
+    localStorage.setItem("Id", id);
+    localStorage.setItem("Pw", pw);
+    localStorage.setItem("ClassNumber", cn);
+    localStorage.setItem("Major", mj);
+    localStorage.setItem("Name", nm);
+    localStorage.setItem("Email", em);
+    localStorage.setItem("Date", dt);
+    localStorage.setItem("Gender", gd);
+   
+}
+
+joinform.addEventListener("submit", onjoinsubmit);
+</script>
